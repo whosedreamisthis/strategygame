@@ -8,23 +8,21 @@ public class Unit : MonoBehaviour
 
     private void Update()
     {
-        float stoppingDistance = 0.1f;
+        float minDistance = 0.1f;
         float distance = Vector3.Distance(targetPosition, transform.position);
-        Vector3 moveDirection = (targetPosition - transform.position).normalized;
         float moveSpeed = 4f;
-        if (distance > stoppingDistance)
+        if (distance > minDistance)
         {
-            transform.position += moveSpeed * moveDirection * Time.deltaTime;
+            Vector3 moveDirection = (targetPosition - transform.position).normalized;
+            transform.position += moveDirection * Time.deltaTime * moveSpeed;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
-            Move(new Vector3(4, 0, 4));
+            Move(MouseWorld.GetPosition());
         }
     }
-
     private void Move(Vector3 targetPosition)
     {
-
         this.targetPosition = targetPosition;
     }
 }

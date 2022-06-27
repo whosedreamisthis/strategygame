@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 24
-  productGUID: 842da131f1668b9439350e1327c2ebfd
+  productGUID: 91ac9d4e9b249c849a83affa8513a13c
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -699,10 +699,10 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 2dce4e10-6f52-4444-9cc7-45415214b991
+  cloudProjectId: eccc4cd0-4be2-4c65-94c4-5e9c316906f5
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Stragegy
+  projectName: Stragegy (1)
   organizationId: whosedreamisthis
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
