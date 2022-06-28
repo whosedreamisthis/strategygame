@@ -40,4 +40,9 @@ public class GridObject : MonoBehaviour
         this.units.Remove(unit);
     }
 
+    public bool HasAnyUnit()
+    {
+        return this.units.Count > 0;
+    }
+
 }
