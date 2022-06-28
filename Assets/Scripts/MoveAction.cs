@@ -16,7 +16,6 @@ public class MoveAction : MonoBehaviour
     }
     public void Move(GridPosition gridPosition)
     {
-
         unitAnimator.SetBool("IsWalking", true);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
     }
