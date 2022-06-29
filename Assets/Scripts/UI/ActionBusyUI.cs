@@ -23,7 +23,6 @@ public class ActionBusyUI : MonoBehaviour
 
     private void ActionBusyUI_OnBusyChanged(object sender, bool isBusy)
     {
-        Debug.Log("isbusy " + isBusy);
         if (isBusy)
         {
             Show();
