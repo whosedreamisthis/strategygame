@@ -28,4 +28,9 @@ public class SpinAction : BaseAction
         }
         transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
     }
+
+    public override string GetActionName()
+    {
+        return "Spin";
+    }
 }
