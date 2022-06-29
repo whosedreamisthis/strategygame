@@ -8,7 +8,7 @@ public class SpinAction : BaseAction
     public delegate void SpinCompleteDelegate();
     // Start is called before the first frame update
     private float totalSpinAmount;
-    public void Spin(Action onSpinComplete)
+    public override void TakeAction(GridPosition gridPosition, Action onSpinComplete)
     {
         onComplete = onSpinComplete;
         isActive = true;
@@ -32,5 +32,17 @@ public class SpinAction : BaseAction
     public override string GetActionName()
     {
         return "Spin";
+    }
+
+    public override List<GridPosition> GetValidActionGridPositionList()
+    {
+        List<GridPosition> validGridPositionList = new List<GridPosition>();
+        GridPosition unitGridPosition = unit.GetGridPosition();
+
+        return new List<GridPosition> {
+            unitGridPosition
+        };
+
+
     }
 }
