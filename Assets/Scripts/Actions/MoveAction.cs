@@ -1,41 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MoveAction : MonoBehaviour
+using System;
+public class MoveAction : BaseAction
 {
+
     [SerializeField] private Animator unitAnimator;
     [SerializeField] private int maxMoveDistance = 4;
     Vector3 targetPosition;
-    private Unit unit;
-    private void Awake()
+    Action onMoveComplete;
+
+    protected override void Awake()
     {
-        unit = GetComponent<Unit>();
+        base.Awake();
         targetPosition = transform.position;
 
     }
-    public void Move(GridPosition gridPosition)
+    public void Move(GridPosition gridPosition, Action onMoveComplete)
     {
+        onComplete = onMoveComplete;
         unitAnimator.SetBool("IsWalking", true);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        isActive = true;
     }
 
     public void Update()
     {
+        if (!isActive)
+        {
+            return;
+        }
         float minDistance = 0.1f;
         float distance = Vector3.Distance(targetPosition, transform.position);
-        float moveSpeed = 4f;
+        Vector3 moveDirection = (targetPosition - transform.position).normalized;
+
         if (distance > minDistance)
         {
-            Vector3 moveDirection = (targetPosition - transform.position).normalized;
+            float moveSpeed = 4f;
+
             transform.position += moveDirection * Time.deltaTime * moveSpeed;
-            float rotateSpeed = 10f;
-            transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotateSpeed * Time.deltaTime);
         }
         else
         {
             unitAnimator.SetBool("IsWalking", false);
+            isActive = false;
+            onComplete();
         }
+
+        float rotateSpeed = 10f;
+        transform.forward = Vector3.Lerp(transform.forward, moveDirection, rotateSpeed * Time.deltaTime);
+
     }
 
     public bool IsValidActionGridPosition(GridPosition gridPosition)
@@ -72,8 +86,6 @@ public class MoveAction : MonoBehaviour
                 }
 
                 validGridPositionList.Add(testGridPosition);
-                Debug.Log("valid " + testGridPosition);
-
             }
         }
         return validGridPositionList;
