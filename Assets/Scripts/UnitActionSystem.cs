@@ -97,7 +97,7 @@ public class UnitActionSystem : MonoBehaviour
             {
                 if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit))
                 {
-                    if (selectedUnit != unit)
+                    if (selectedUnit != unit && !unit.IsEnemy())
                     {
                         SetSelectedUnit(unit);
                         return true;
