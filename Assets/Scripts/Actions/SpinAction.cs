@@ -10,8 +10,8 @@ public class SpinAction : BaseAction
     private float totalSpinAmount;
     public override void TakeAction(GridPosition gridPosition, Action onSpinComplete)
     {
-        onComplete = onSpinComplete;
-        isActive = true;
+        ActionStart(onSpinComplete);
+
         totalSpinAmount = 0;
     }
 
@@ -23,8 +23,7 @@ public class SpinAction : BaseAction
         totalSpinAmount += spinAddAmount;
         if (totalSpinAmount >= 360)
         {
-            isActive = false;
-            onComplete();
+            ActionComplete();
         }
         transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
     }

@@ -45,4 +45,9 @@ public class GridObject : MonoBehaviour
         return this.units.Count > 0;
     }
 
+    public Unit GetUnit()
+    {
+        return HasAnyUnit() ? this.units[0] : null;
+    }
+
 }
