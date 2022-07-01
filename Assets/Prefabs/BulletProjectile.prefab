@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trail: {fileID: 7981633232951243842}
+  bulletHitFX: {fileID: 326376917788223369, guid: cdfd49a2fc563cd499c1b1b1efe81a25,
+    type: 3}
 --- !u!1 &7981633232951243844
 GameObject:
   m_ObjectHideFlags: 0
