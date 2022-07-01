@@ -33,27 +33,30 @@ public class ShootAction : BaseAction
     private void Update()
     {
         if (!isActive) return;
-
         stateTimer -= Time.deltaTime;
-        switch (state)
+
+        if (targetUnit != null)
         {
-            case State.Aiming:
-                float rotateSpeed = 10f;
-                Vector3 aimDirection = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
+            switch (state)
+            {
+                case State.Aiming:
+                    float rotateSpeed = 10f;
+                    Vector3 aimDirection = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
 
-                transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotateSpeed * Time.deltaTime);
-                if (canShootBullet)
-                {
-                    Shoot();
-                    canShootBullet = false;
-                }
-                break;
-            case State.Shooting:
+                    transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotateSpeed * Time.deltaTime);
+                    if (canShootBullet)
+                    {
+                        Shoot();
+                        canShootBullet = false;
+                    }
+                    break;
+                case State.Shooting:
 
-                break;
-            case State.Cooloff:
+                    break;
+                case State.Cooloff:
 
-                break;
+                    break;
+            }
         }
 
         if (stateTimer <= 0f)
@@ -78,7 +81,7 @@ public class ShootAction : BaseAction
             targetUnit = targetUnit,
             shooter = unit
         });
-        targetUnit.Damage();
+        targetUnit.Damage(40);
     }
 
     private void NextState()

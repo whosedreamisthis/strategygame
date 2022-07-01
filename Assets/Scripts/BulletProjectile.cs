@@ -26,8 +26,9 @@ public class BulletProjectile : MonoBehaviour
         {
             transform.position = targetPosition;
             trail.transform.parent = null;
-            Destroy(gameObject);
             Instantiate(bulletHitFX, targetPosition, Quaternion.identity);
+
+            Destroy(gameObject);
 
         }
     }
