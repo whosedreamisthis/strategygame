@@ -44,14 +44,14 @@ public class ShootAction : BaseAction
                     Vector3 aimDirection = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
 
                     transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotateSpeed * Time.deltaTime);
+
+                    break;
+                case State.Shooting:
                     if (canShootBullet)
                     {
                         Shoot();
                         canShootBullet = false;
                     }
-                    break;
-                case State.Shooting:
-
                     break;
                 case State.Cooloff:
 
@@ -152,15 +152,20 @@ public class ShootAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        ActionStart(onActionComplete);
         targetUnit = LevelGrid.Instance.GetUnitOnGridPosition(gridPosition);
         state = State.Aiming;
         float aimingStateTime = 1f;
         stateTimer = aimingStateTime;
         canShootBullet = true;
+        ActionStart(onActionComplete);
 
         //Vector3 shootDirection = (gridPosition - transform.position).normalized;
 
 
+    }
+
+    public Unit GetTargetUnit()
+    {
+        return targetUnit;
     }
 }

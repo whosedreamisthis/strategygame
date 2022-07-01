@@ -4,6 +4,9 @@ using UnityEngine;
 using System;
 public abstract class BaseAction : MonoBehaviour
 {
+    public static event EventHandler OnAnyActionStarted;
+    public static event EventHandler OnAnyActionCompleted;
+
     // Start is called before the first frame update
     protected Unit unit;
     protected bool isActive;
@@ -34,11 +37,18 @@ public abstract class BaseAction : MonoBehaviour
     {
         isActive = true;
         this.onComplete = onActionComplete;
+        OnAnyActionStarted?.Invoke(this, EventArgs.Empty);
     }
 
     protected void ActionComplete()
     {
         this.onComplete();
         isActive = false;
+        OnAnyActionCompleted?.Invoke(this, EventArgs.Empty);
+    }
+
+    public Unit GetUnit()
+    {
+        return unit;
     }
 }
