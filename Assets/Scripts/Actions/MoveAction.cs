@@ -5,8 +5,9 @@ using System;
 public class MoveAction : BaseAction
 {
 
+    public event EventHandler OnStartMoving;
+    public event EventHandler OnStopMoving;
 
-    [SerializeField] Animator unitAnimator;
     [SerializeField] private int maxMoveDistance = 4;
     Vector3 targetPosition;
     Action onMoveComplete;
@@ -20,9 +21,8 @@ public class MoveAction : BaseAction
     public override void TakeAction(GridPosition gridPosition, Action onMoveComplete)
     {
         ActionStart(onMoveComplete);
-        unitAnimator.SetBool("IsWalking", true);
         this.targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-
+        OnStartMoving?.Invoke(this, EventArgs.Empty);
     }
 
     public void Update()
@@ -43,7 +43,8 @@ public class MoveAction : BaseAction
         }
         else
         {
-            unitAnimator.SetBool("IsWalking", false);
+            OnStopMoving?.Invoke(this, EventArgs.Empty);
+
             ActionComplete();
         }
 

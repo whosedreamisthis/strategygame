@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class ShootAction : BaseAction
 {
+    public event EventHandler<OnShootEventArgs> OnShoot;
+
+    public class OnShootEventArgs : EventArgs
+    {
+        public Unit targetUnit;
+        public Unit shooter;
+    }
+
     private enum State
     {
         Aiming,
@@ -83,6 +91,11 @@ public class ShootAction : BaseAction
                 float coolOffStateTime = 0.5f;
                 stateTimer = coolOffStateTime;
                 state = State.Cooloff;
+                OnShoot?.Invoke(this, new OnShootEventArgs
+                {
+                    targetUnit = targetUnit,
+                    shooter = unit
+                });
                 break;
             case State.Cooloff:
 
