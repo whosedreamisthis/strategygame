@@ -38,7 +38,10 @@ public class UnitAnimator : MonoBehaviour
         animator.SetTrigger("Shoot");
         Transform bulletProjectileTransform = Instantiate(bulletProjectilePrefab, shootPointTransform.position, Quaternion.identity);
         BulletProjectile bulletProjectile = bulletProjectileTransform.GetComponent<BulletProjectile>();
-        bulletProjectile.Setup(new Vector3(e.targetUnit.GetWorldPosition().x, 2, e.targetUnit.GetWorldPosition().z));
+
+        Vector3 targetUnitShootAtPosition = e.targetUnit.GetWorldPosition();
+        targetUnitShootAtPosition.y = shootPointTransform.position.y;
+        bulletProjectile.Setup(targetUnitShootAtPosition);
 
     }
 }

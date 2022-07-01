@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0272c1e86a4f4448da4fefca0ab850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trail: {fileID: 7981633232951243842}
 --- !u!1 &7981633232951243844
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +120,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.01
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.05
@@ -185,6 +186,6 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 0
+  m_Autodestruct: 1
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1

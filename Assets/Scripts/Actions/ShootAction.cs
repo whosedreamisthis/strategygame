@@ -42,14 +42,14 @@ public class ShootAction : BaseAction
                 Vector3 aimDirection = (targetUnit.GetWorldPosition() - unit.GetWorldPosition()).normalized;
 
                 transform.forward = Vector3.Lerp(transform.forward, aimDirection, rotateSpeed * Time.deltaTime);
-
-                break;
-            case State.Shooting:
                 if (canShootBullet)
                 {
                     Shoot();
                     canShootBullet = false;
                 }
+                break;
+            case State.Shooting:
+
                 break;
             case State.Cooloff:
 
@@ -73,6 +73,11 @@ public class ShootAction : BaseAction
 
     private void Shoot()
     {
+        OnShoot?.Invoke(this, new OnShootEventArgs
+        {
+            targetUnit = targetUnit,
+            shooter = unit
+        });
         targetUnit.Damage();
     }
 
@@ -85,17 +90,14 @@ public class ShootAction : BaseAction
                 float shootingStateTime = 0.1f;
                 stateTimer = shootingStateTime;
                 state = State.Shooting;
+
                 break;
             case State.Shooting:
 
                 float coolOffStateTime = 0.5f;
                 stateTimer = coolOffStateTime;
                 state = State.Cooloff;
-                OnShoot?.Invoke(this, new OnShootEventArgs
-                {
-                    targetUnit = targetUnit,
-                    shooter = unit
-                });
+
                 break;
             case State.Cooloff:
 
